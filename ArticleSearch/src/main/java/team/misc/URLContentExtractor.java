@@ -23,22 +23,30 @@ public class URLContentExtractor {
 		}
 		in.close();
 
-		return sanitize(contents);
+		return contents;
 	}
 
 	// contents = url from file
-	protected String sanitize(String contents) {
-
+	public String sanitize(String contents) {
+		if (contents == null) {
+			return "";
+		}
 		StringBuilder builder = new StringBuilder();
 		Document doc = Jsoup.parse(contents, "UTF-8");
 		Elements elements = doc.select("p");
 		// extract the paragraph text only
 		for (Element element : elements) {
 			String targetHtml = element.text();
+			//put <p> and </p> back in order to break up paragraphs correctly 
 			builder.append("<p>").append(targetHtml).append("</p>");
 		}
 		// Puts just the text you want into a string that can then be searched
 		// and highlighted
 		return builder.toString();
+	}
+	
+	public String readAndSanitize(URL url) throws IOException {
+		String contents = read(url);
+		return sanitize(contents);
 	}
 }

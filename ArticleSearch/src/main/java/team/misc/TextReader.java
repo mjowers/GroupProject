@@ -13,11 +13,9 @@ public class TextReader {
 	public static ArrayList<String> readFile (Path filePath) {
 		ArrayList<String> textFromFile = new ArrayList<String> ();
 		try {
-<<<<<<< Updated upstream
+
 			BufferedReader reader = Files.newBufferedReader(filePath,StandardCharsets.UTF_8);
-=======
-			BufferedReader reader = Files.newBufferedReader(filePath, StandardCharsets.UTF_8);
->>>>>>> Stashed changes
+
 			String lines;
 			while ((lines = reader.readLine()) != null) {
 				textFromFile.add(lines);

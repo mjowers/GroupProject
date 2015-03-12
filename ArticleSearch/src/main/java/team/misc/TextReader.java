@@ -13,10 +13,7 @@ import java.util.ArrayList;
 public class TextReader {
 	public static ArrayList<String> readFile (Path filePath) {
 		ArrayList<String> textFromFile = new ArrayList<String> ();
-		try {
-
-
-			BufferedReader reader = Files.newBufferedReader(filePath,StandardCharsets.UTF_8);
+		try( BufferedReader reader = Files.newBufferedReader(filePath,StandardCharsets.UTF_8)) {
 
 
 			String lines;

@@ -3,7 +3,6 @@ package team.misc;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -53,8 +52,6 @@ public class BinarySearcherTest {
 		words.add("one");
 		words.add("two");
 		words.add("three");
-		Collections.sort(words);
-		Collections.sort(multipleElements);
 		actual = BinarySearcher.search(words, multipleElements); // returns
 																	// empty
 																	// HashMap
@@ -73,8 +70,6 @@ public class BinarySearcherTest {
 		expected.put("two", 1);
 		words.add("one");
 		words.add("two");
-		Collections.sort(words);
-		Collections.sort(repeatElements);
 		actual = BinarySearcher.search(words, repeatElements); // returns empty
 																// HashMap
 		assertEquals(expected, actual);

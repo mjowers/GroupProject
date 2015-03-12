@@ -18,7 +18,18 @@ public class ArrayOrganizerTest {
 	@Test
 	public void testForEmptyInEmptyOut() {
 		ArrayList<String> empty = new ArrayList<>();
-		actual = ArrayOrganizer.createArray(empty, null);
+		actual = ArrayOrganizer.createArray(empty, " ");
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testForNullDelimiters() {
+		ArrayList<String> test = new ArrayList<>();
+		test.add("one");
+		test.add("two");
+		expected.add("one");
+		expected.add("two");
+		actual = ArrayOrganizer.createArray(test, null);
 		assertEquals(expected, actual);
 	}
 

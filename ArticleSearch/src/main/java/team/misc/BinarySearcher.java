@@ -8,10 +8,12 @@ public class BinarySearcher {
 
 	public static HashMap<String, Integer> search(ArrayList<String> wordArray,
 			ArrayList<String> articleArray) {
+		Collections.sort(wordArray);
+		Collections.sort(articleArray);
 		HashMap<String, Integer> articleContains = new HashMap<>();
 		int frequency;
-		for (String word : wordArray) {
-			if (Collections.binarySearch(articleArray,word) > -1) {
+		for (String word : articleArray) {
+			if (Collections.binarySearch(wordArray,word) > -1) {
 				frequency=Collections.frequency(articleArray, word); //use collections for searching list. uses frequency method
 				articleContains.put(word, frequency);
 			}

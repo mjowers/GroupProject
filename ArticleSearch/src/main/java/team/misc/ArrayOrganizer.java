@@ -7,6 +7,9 @@ public class ArrayOrganizer {
 
 	public static ArrayList<String> createArray(ArrayList<String> arrayIn,
 			String delims) {
+		if (arrayIn.size() < 1 || delims == null) {
+			return arrayIn;
+		}
 		ArrayList<String> arrayOut = new ArrayList<String>();
 		for (String line : arrayIn) {
 			StringTokenizer st = new StringTokenizer(line, delims);

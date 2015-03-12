@@ -1,21 +1,21 @@
 package team.misc;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class ArrayOrganizerTest {
 	ArrayList<String> expected = new ArrayList<>();
 	ArrayList<String> actual = new ArrayList<>();
 
+	
+	// Tests for ArrayList<String> version
 	@Test
 	public void testForEmptyInEmptyOut() {
 		ArrayList<String> empty = new ArrayList<>();
-		actual = ArrayOrganizer.createArray(empty, null);
+		actual = ArrayOrganizer.createArrayFromArrayList(empty, null);
 		assertEquals(expected, actual);
 	}
 
@@ -27,7 +27,7 @@ public class ArrayOrganizerTest {
 								// can't just initialize with =
 		expected.add("two");
 		expected.add("three");
-		actual = ArrayOrganizer.createArray(test, " ,\"");
+		actual = ArrayOrganizer.createArrayFromArrayList(test, " ,\"");
 		assertEquals(expected, actual);
 		// create a known sample and then see what comes back
 	}
@@ -44,7 +44,28 @@ public class ArrayOrganizerTest {
 		expected.add("blue");
 		expected.add("red");
 		expected.add("stephen");
-		actual = ArrayOrganizer.createArray(test, " ,\"");
+		actual = ArrayOrganizer.createArrayFromArrayList(test, " ,\"");
 		assertEquals(expected, actual);
 }
+	
+	// Tests for String Version
+	@Test
+	public void testStringVersionForEmptyInEmptyOut() {
+		String empty = new String();
+		actual = ArrayOrganizer.createArrayFromString(empty, null);
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testStringVersionForOneLineInSingleArrayOut() {
+		String test = new String("one two three blue red stephen");
+		expected.add("one"); 
+		expected.add("two");
+		expected.add("three");
+		expected.add("blue");
+		expected.add("red");
+		expected.add("stephen");
+		actual = ArrayOrganizer.createArrayFromString(test, " ");
+		assertEquals(expected, actual);
+	}
 }

@@ -76,7 +76,8 @@ public class URLContentExtractorTest extends TestCase {
 	 * test an internet call?
 	 * @throws IOException
 	 */
-	@Test
+	@Test//redo with mock url instead of URLContentExtracor, input stream 
+	//add tests for null and invalid url input 
 	public void testRead() throws IOException {
 		URLContentExtractor mockedExtractor = mock(URLContentExtractor.class);
 		URL url = new URL("http://www.test.com");
@@ -101,7 +102,7 @@ public class URLContentExtractorTest extends TestCase {
 		
 	}
 	//making sure sanitize works with a whole bunch of possible inputs
-	//could write a helper method or put this in a hashmap 
+	//could write a helper method or put all of this into a hashmap 
 	public void testSanitize() {
 		URLContentExtractor contentExtractor = new URLContentExtractor();
 		String html = "<html><body>This is some text.<p>This should be returned</p></body></html>";

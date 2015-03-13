@@ -8,11 +8,13 @@ import org.junit.Test;
 public class ArrayOrganizerTest {
 	ArrayList<String> expected = new ArrayList<>();
 	ArrayList<String> actual = new ArrayList<>();
-
+	ArrayList<String> test = new ArrayList<>();
+	
 	@Before
 	public void initialize() {
 		actual.clear();
 		expected.clear();
+		test.clear();
 	}
 
 	@Test
@@ -24,7 +26,6 @@ public class ArrayOrganizerTest {
 	
 	@Test
 	public void nullDelimiters() {
-		ArrayList<String> test = new ArrayList<>();
 		test.add("one");
 		test.add("two");
 		expected.add("one");
@@ -32,10 +33,19 @@ public class ArrayOrganizerTest {
 		actual = ArrayOrganizer.createArray(test, null);
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void noDelimiters() {
+		test.add("one alpha.");
+		test.add("two.beta ");
+		expected.add("one alpha.");
+		expected.add("two.beta ");
+		actual = ArrayOrganizer.createArray(test, "");
+		assertEquals(expected, actual);
+	}
 
 	@Test
 	public void oneLineIn() {
-		ArrayList<String> test = new ArrayList<>();
 		test.add("\"one\", \"two\", \"three\"");
 		expected.add("one");
 		expected.add("two");
@@ -46,7 +56,6 @@ public class ArrayOrganizerTest {
 
 	@Test
 	public void twoLinesIn() {
-		ArrayList<String> test = new ArrayList<>();
 		test.add("\"one\", \"two\", \"three\"");
 		test.add("\"blue\", \"red\", \"green\"");
 		expected.add("one");

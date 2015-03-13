@@ -7,7 +7,7 @@ public class ArrayOrganizer {
 
 	public static ArrayList<String> createArray(ArrayList<String> arrayIn,
 			String delims) {
-		if (arrayIn.size() < 1 || delims == null) {
+		if (arrayIn.size() < 1 || delims == null || delims == "") {
 			return arrayIn;
 		}
 		ArrayList<String> arrayOut = new ArrayList<String>();

@@ -8,9 +8,12 @@ public class BinarySearcher {
 
 	public static HashMap<String, Integer> search(ArrayList<String> wordArray,
 			ArrayList<String> articleArray) {
+		HashMap<String, Integer> articleContains = new HashMap<>();
+		if ( wordArray.size() < 1 || articleArray.size() < 1 ) {
+			return articleContains;
+		}
 		Collections.sort(wordArray);
 		Collections.sort(articleArray);
-		HashMap<String, Integer> articleContains = new HashMap<>();
 		int frequency;
 		for (String word : articleArray) {
 			if (Collections.binarySearch(wordArray,word) > -1) {
@@ -20,8 +23,4 @@ public class BinarySearcher {
 		}
 		return articleContains;
 	}
-
 }
-// Binary searches need to be in alphabetical or numerical order
-//Collections.sort(wordArray);
-//Collections.sort(articleArray);

@@ -2,12 +2,7 @@ package team.misc;
 
 import static org.junit.Assert.*;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -19,7 +14,7 @@ public class HtmlOutputTest {
 	ArrayList<String> actual = new ArrayList<>();
 	ArrayList<String> expected = new ArrayList<>();
 	String sep = File.separator;
-	String path = new File("").getAbsolutePath();
+	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test";
 
 	@Before
 	public void initialize() {

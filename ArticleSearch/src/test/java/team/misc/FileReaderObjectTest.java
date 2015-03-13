@@ -2,8 +2,9 @@ package team.misc;
 
 import static org.junit.Assert.*;
 
-import java.nio.file.FileSystems;
+import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -13,8 +14,12 @@ public class FileReaderObjectTest {
 
 	ArrayList<String> actual = new ArrayList<>();
 	ArrayList<String> expected = new ArrayList<>();
-	Path fileDummy = FileSystems.getDefault().getPath("dummy.txt");
-	FileReaderObject dummyObject = new FileReaderObject(fileDummy);
+	String sep = File.separator;
+	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test";
+	Path dummyPath = Paths.get(path + sep + "dummy.txt");
+	FileReaderObject dummyObject = new FileReaderObject(dummyPath);
+	Path noFilePath = Paths.get(path + sep + "nofile.txt");
+	FileReaderObject noObject = new FileReaderObject(noFilePath);
 	
 	@Before
 	public void initialize() {
@@ -22,6 +27,18 @@ public class FileReaderObjectTest {
 		expected.clear();
 	}
 
+	@Test
+	public void noFileNoRawText() {
+		actual = noObject.getRawText();
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void noFileNoSanitizedText() {
+		actual = noObject.sanitizeText(" ");
+		assertEquals(expected, actual);
+	}
+	
 	@Test
 	public void dummyFileRawText() {
 		actual = dummyObject.getRawText();
@@ -31,7 +48,15 @@ public class FileReaderObjectTest {
 	}
 
 	@Test
-	public void dummyFileTextSanitizer() {
+	public void dummyFileNoDelimiters() {
+		actual = dummyObject.sanitizeText(null);
+		expected.add("This is");
+		expected.add("a test.");
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void dummyFileSanitizedText() {
 		actual = dummyObject.sanitizeText(" .\r");
 		expected.add("This");
 		expected.add("is");

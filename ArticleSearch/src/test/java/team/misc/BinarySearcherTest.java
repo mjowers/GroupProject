@@ -12,66 +12,91 @@ public class BinarySearcherTest {
 
 	HashMap<String, Integer> actual = new HashMap<>();
 	HashMap<String, Integer> expected = new HashMap<>();
+	ArrayList<String> words = new ArrayList<>();
 
 	@Before
 	public void initialize() {
 		actual.clear();
 		expected.clear();
+		words.clear();
 	}
 
 	@Test
-	public void testEmptyInEmptyOut() {
+	public void emptyArraysToSearchAndSearchFrom() {
 		ArrayList<String> empty = new ArrayList<>();
-		actual = BinarySearcher.search(empty, empty); // returns empty HashMap
-		HashMap<String, Integer> expected = new HashMap<>();
+		actual = BinarySearcher.search(empty, empty);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void emptyArrayToSearch() {
+		ArrayList<String> empty = new ArrayList<>();
+		words.add("alpha");
+		actual = BinarySearcher.search(words, empty);
+		assertEquals(expected, actual);
+	}
+	
+	public void emptyArrayToSearchFrom() {
+		ArrayList<String> array = new ArrayList<>();
+		array.add("alpha");
+		actual = BinarySearcher.search(words, array);
 		assertEquals(expected, actual);
 	}
 
 	@Test
-	public void testOneElementArray() {
+	public void singleElementArray() {
 		ArrayList<String> oneElement = new ArrayList<>();
 		ArrayList<String> words = new ArrayList<>();
-		oneElement.add("one");
-		words.add("one");
-		expected.put("one", 1); // word one found once
-		actual = BinarySearcher.search(words, oneElement); // returns empty
-															// HashMap
+		oneElement.add("alpha");
+		words.add("alpha");
+		expected.put("alpha", 1);
+		actual = BinarySearcher.search(words, oneElement);
 		assertEquals(expected, actual);
 	}
 
 	@Test
-	public void testMultipleElementArray() {
+	public void multipleElementArray() {
 		ArrayList<String> multipleElements = new ArrayList<>();
-		ArrayList<String> words = new ArrayList<>();
-		multipleElements.add("one");
-		multipleElements.add("two");
-		multipleElements.add("three");
-		expected.put("one", 1); // word one found once
-		expected.put("two", 1);
-		expected.put("three", 1);
-		words.add("one");
-		words.add("two");
-		words.add("three");
-		actual = BinarySearcher.search(words, multipleElements); // returns
-																	// empty
-																	// HashMap
+		multipleElements.add("alpha");
+		multipleElements.add("beta");
+		multipleElements.add("gamma");
+		expected.put("alpha", 1);
+		expected.put("beta", 1);
+		expected.put("gamma", 1);
+		words.add("alpha");
+		words.add("beta");
+		words.add("gamma");
+		actual = BinarySearcher.search(words, multipleElements);
 		assertEquals(expected, actual);
 	}
 
 	@Test
-	public void testRepeatedElementsArray() {
+	public void repeatedElementsArray() {
 		ArrayList<String> repeatElements = new ArrayList<>();
-		ArrayList<String> words = new ArrayList<>();
-		repeatElements.add("one");
-		repeatElements.add("two");
-		repeatElements.add("one");
-		repeatElements.add("three");
-		expected.put("one", 2); // word one found twice
-		expected.put("two", 1);
-		words.add("one");
-		words.add("two");
-		actual = BinarySearcher.search(words, repeatElements); // returns empty
-																// HashMap
+		repeatElements.add("alpha");
+		repeatElements.add("alpha");
+		repeatElements.add("beta");
+		repeatElements.add("gamma");
+		expected.put("alpha", 2);
+		expected.put("beta", 1);
+		words.add("alpha");
+		words.add("beta");
+		actual = BinarySearcher.search(words, repeatElements);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void initallyUnsortedArray() {
+		ArrayList<String> unsortedElements = new ArrayList<>();
+		unsortedElements.add("zeta");
+		unsortedElements.add("alpha");
+		unsortedElements.add("beta");
+		unsortedElements.add("alpha");
+		expected.put("alpha", 2); // word one found twice
+		expected.put("zeta", 1);
+		words.add("alpha");
+		words.add("zeta");
+		actual = BinarySearcher.search(words, unsortedElements);
 		assertEquals(expected, actual);
 	}
 }

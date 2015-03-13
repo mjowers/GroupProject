@@ -16,14 +16,14 @@ public class ArrayOrganizerTest {
 	}
 
 	@Test
-	public void testForEmptyInEmptyOut() {
+	public void emptyInEmptyOut() {
 		ArrayList<String> empty = new ArrayList<>();
 		actual = ArrayOrganizer.createArray(empty, " ");
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	public void testForNullDelimiters() {
+	public void nullDelimiters() {
 		ArrayList<String> test = new ArrayList<>();
 		test.add("one");
 		test.add("two");
@@ -34,7 +34,7 @@ public class ArrayOrganizerTest {
 	}
 
 	@Test
-	public void testForOneLineInSingleArrayOut() {
+	public void oneLineIn() {
 		ArrayList<String> test = new ArrayList<>();
 		test.add("\"one\", \"two\", \"three\"");
 		expected.add("one");
@@ -45,16 +45,16 @@ public class ArrayOrganizerTest {
 	}
 
 	@Test
-	public void testForTwoLinesInSingleArrayOut() {
+	public void twoLinesIn() {
 		ArrayList<String> test = new ArrayList<>();
 		test.add("\"one\", \"two\", \"three\"");
-		test.add("\"blue\", \"red\", \"stephen\"");
+		test.add("\"blue\", \"red\", \"green\"");
 		expected.add("one");
 		expected.add("two");
 		expected.add("three");
 		expected.add("blue");
 		expected.add("red");
-		expected.add("stephen");
+		expected.add("green");
 		actual = ArrayOrganizer.createArray(test, " ,\"");
 		assertEquals(expected, actual);
 	}

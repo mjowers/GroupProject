@@ -1,42 +1,61 @@
 package team.misc;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class ArticleSearch 
-{
-    public static void main( String[] args ) throws IOException
-    {
-    Path wordsPath = FileSystems.getDefault().getPath("words.txt");
-    FileReaderObject words = new FileReaderObject(wordsPath);
-    
-    Path urlPath = FileSystems.getDefault().getPath("urlslist.txt");
-    FileReaderObject urls = new FileReaderObject(urlPath);
-    
-    ArrayList<String> wordList = words.sanitizeText(",\"");
-    ArrayList<String> urlList = urls.getRawText();
+public class ArticleSearch {
+	public static void main(String[] args) throws IOException {
+		Path wordsPath = FileSystems.getDefault().getPath("words.txt");
+		FileReaderObject words = new FileReaderObject(wordsPath);
 
-//    URL url = new URL(urlList.get(0));
-//    String text = URLContentExtractor.readAndSanitize(url);
-    
-//    ArrayList<String> stringList = new ArrayList();
-//    stringList.add(text);
-    
-//    ArrayList<String> stringArray = ArrayOrganizer.createArray(stringList, " ");
-//    
-//    HashMap<String, Integer> articleContains = BinarySearcher.search(wordList, stringArray);
-//    
-//    Set<String> keySet = articleContains.keySet();
-//    for (String key: keySet){
-//    	System.out.println(key + " " + articleContains.get(key));
-//    }
-    
-    
-    
-    }
+		Path urlPath = FileSystems.getDefault().getPath("urlslist.txt");
+		FileReaderObject urls = new FileReaderObject(urlPath);
+
+		ArrayList<String> wordList = words.sanitizeText(",\"");
+		ArrayList<String> urlList = urls.getRawText();
+
+		URLContentExtractor urlce = new URLContentExtractor();
+		ArrayList<String> textArray = new ArrayList<>();
+		ArrayList<String> textWordsArray = new ArrayList<>();
+		HashMap<String, Integer> articleContains = new HashMap<>();
+		ArrayList<String> articleWords = new ArrayList<>();
+
+		for (int i = 0; i < urlList.size(); i++) {
+			textArray.clear();
+			textWordsArray.clear();
+			articleContains.clear();
+			articleWords.clear();
+
+			URL url = new URL(urlList.get(i));
+			String text = urlce.readAndSanitize(url);
+			textArray.add(text);
+
+			textWordsArray = ArrayOrganizer.createArray(textArray, " ,()\"");
+
+			articleContains = BinarySearcher.search(wordList, textWordsArray);
+
+			Set<String> keySet = articleContains.keySet();
+			// for (String key : keySet) {
+			// System.out.println(key + " " + articleContains.get(key));
+			// }
+
+			articleWords.addAll(keySet);
+
+			String markedText = MarkUpText.markUp(text, articleWords);
+
+			String sep = File.separator;
+			String pathString = new File("").getAbsolutePath() + sep
+					+ "markeduparticle" + i + ".htm";
+			Path path = Paths.get(pathString);
+
+			HtmlOutput.htmlOut(markedText, path);
+		}
+	}
 }

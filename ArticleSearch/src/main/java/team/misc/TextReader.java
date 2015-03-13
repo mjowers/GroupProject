@@ -20,7 +20,7 @@ public class TextReader {
 			}
 		}
 		catch (IOException ioe){
-			ioe.printStackTrace();
+			ioe.getMessage();
 		}
 		System.out.println(textFromFile);
 		return textFromFile;

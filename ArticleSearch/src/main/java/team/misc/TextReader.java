@@ -22,7 +22,6 @@ public class TextReader {
 		catch (IOException ioe){
 			ioe.getMessage();
 		}
-		System.out.println(textFromFile);
 		return textFromFile;
 	}
 }

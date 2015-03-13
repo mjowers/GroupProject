@@ -30,7 +30,7 @@ public class ArticleSearch {
 		HashMap<String, Integer> articleContains = new HashMap<>();
 		ArrayList<String> articleWords = new ArrayList<>();
 
-		for (int i = 0; i < urlList.size(); i++) {
+		for (int i = 5; i < 6; i++) {
 			textArray.clear();
 			textWordsArray.clear();
 			articleContains.clear();

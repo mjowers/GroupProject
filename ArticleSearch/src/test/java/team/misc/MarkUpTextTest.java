@@ -81,5 +81,14 @@ public class MarkUpTextTest {
 		expected = "this <mark>text</mark> is <mark>longer</mark> now";
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void wordsInsideWords() {
+		text = "quest question";
+		mark.add("quest");
+		actual = MarkUpText.markUp(text, mark);
+		expected = "<mark>quest</mark> question";
+		assertEquals(expected, actual);
+	}
 
 }

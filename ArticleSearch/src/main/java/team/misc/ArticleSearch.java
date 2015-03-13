@@ -40,12 +40,13 @@ public class ArticleSearch {
 			String text = urlce.readAndSanitize(url);
 			textArray.add(text);
 
-			textWordsArray = ArrayOrganizer.createArray(textArray, ".?! ,()\"\'");
+			textWordsArray = ArrayOrganizer.createArray(textArray,
+					".?! ,()\"\'");
 
 			articleContains = BinarySearcher.search(wordList, textWordsArray);
 
 			Set<String> keySet = articleContains.keySet();
-			System.out.println("Article " + (i+1) + " contains...");
+			System.out.println("Article " + (i + 1) + " contains...");
 			for (String key : keySet) {
 				System.out.println(key + " " + articleContains.get(key)
 						+ " time(s).");
@@ -56,11 +57,11 @@ public class ArticleSearch {
 
 			String markedText = MarkUpText.markUp(text, articleWords);
 
-			String topPathString = new File("").getAbsolutePath() + sep
-					+ "markeduparticle" + (i+1) + ".htm";
-			Path topPath = Paths.get(topPathString);
+			String outPathString = System.getProperty("user.home") + sep
+					+ "markeduparticle" + (i + 1) + ".htm";
+			Path outPath = Paths.get(outPathString);
 
-			HtmlOutput.htmlOut(markedText, topPath);
+			HtmlOutput.htmlOut(markedText, outPath);
 		}
 	}
 }

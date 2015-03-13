@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 
 public class URLContentExtractor {
 	// read url from array and extract html from each url
-	public static String read(URL url) throws IOException {
+	public String read(URL url) throws IOException {
 		BufferedReader in;
 		in = new BufferedReader(new InputStreamReader(url.openStream()));
 
@@ -27,7 +27,7 @@ public class URLContentExtractor {
 	}
 
 	// contents = url from file
-	public static String sanitize(String contents) {
+	public String sanitize(String contents) {
 		if (contents == null) {
 			return "";
 		}
@@ -45,7 +45,7 @@ public class URLContentExtractor {
 		return builder.toString();
 	}
 	
-	public static String readAndSanitize(URL url) throws IOException {
+	public String readAndSanitize(URL url) throws IOException {
 		String contents = read(url);
 		return sanitize(contents);
 	}

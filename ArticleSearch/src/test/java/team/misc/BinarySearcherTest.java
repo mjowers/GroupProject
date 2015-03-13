@@ -36,6 +36,7 @@ public class BinarySearcherTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
 	public void emptyArrayToSearchFrom() {
 		ArrayList<String> array = new ArrayList<>();
 		array.add("alpha");
@@ -51,6 +52,18 @@ public class BinarySearcherTest {
 		words.add("alpha");
 		expected.put("alpha", 1);
 		actual = BinarySearcher.search(words, oneElement);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void caseConflict() {
+		ArrayList<String> capitalizeElement = new ArrayList<>();
+		ArrayList<String> words = new ArrayList<>();
+		capitalizeElement.add("ALPHA");
+		capitalizeElement.add("beta");
+		words.add("alpha");
+		expected.put("ALPHA", 1);
+		actual = BinarySearcher.search(words, capitalizeElement);
 		assertEquals(expected, actual);
 	}
 

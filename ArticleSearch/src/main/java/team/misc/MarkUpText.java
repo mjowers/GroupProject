@@ -11,8 +11,7 @@ public class MarkUpText {
 			return text;
 		}
 		for (String word : words) {
-			text = text.replaceAll("\\b" + word + "\\b", "<mark>" + word + "</mark>");
-
+			text = text.replaceAll("\\b(?i)(" + word + ")\\b", "<mark>$1</mark>");
 		}
 		return text;
 	}

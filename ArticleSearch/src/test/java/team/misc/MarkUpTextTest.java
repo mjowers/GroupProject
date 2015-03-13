@@ -90,5 +90,24 @@ public class MarkUpTextTest {
 		expected = "<mark>quest</mark> question";
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void hyphenatedWords() {
+		text = "here's a-hyphen";
+		mark.add("a-hyphen");
+		actual = MarkUpText.markUp(text, mark);
+		expected = "here's <mark>a-hyphen</mark>";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void caseConflict() {
+		text = "CApital LEttERS";
+		mark.add("capital");
+		mark.add("letters");
+		actual = MarkUpText.markUp(text, mark);
+		expected = "<mark>CApital</mark> <mark>LEttERS</mark>";
+		assertEquals(expected, actual);
+	}
 
 }

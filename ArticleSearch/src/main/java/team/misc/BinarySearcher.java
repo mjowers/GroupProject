@@ -9,14 +9,15 @@ public class BinarySearcher {
 	public static HashMap<String, Integer> search(ArrayList<String> wordArray,
 			ArrayList<String> articleArray) {
 		HashMap<String, Integer> articleContains = new HashMap<>();
-		if ( wordArray.size() < 1 || articleArray.size() < 1 ) {
+		if (wordArray.size() < 1 || articleArray.size() < 1) {
 			return articleContains;
 		}
 		Collections.sort(wordArray);
 		Collections.sort(articleArray);
 		int frequency;
 		for (String word : articleArray) {
-			if (Collections.binarySearch(wordArray,word) > -1) {
+			String wordLowerCase = word.toLowerCase();
+			if (Collections.binarySearch(wordArray, wordLowerCase) > -1) {
 				frequency = Collections.frequency(articleArray, word);
 				articleContains.put(word, frequency);
 			}

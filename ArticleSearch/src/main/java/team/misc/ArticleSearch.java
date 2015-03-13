@@ -40,7 +40,7 @@ public class ArticleSearch {
 			String text = urlce.readAndSanitize(url);
 			textArray.add(text);
 
-			textWordsArray = ArrayOrganizer.createArray(textArray, " ,()\"");
+			textWordsArray = ArrayOrganizer.createArray(textArray, ".?! ,()\"\'");
 
 			articleContains = BinarySearcher.search(wordList, textWordsArray);
 

@@ -14,7 +14,7 @@ public class HtmlOutputTest {
 	ArrayList<String> actual = new ArrayList<>();
 	ArrayList<String> expected = new ArrayList<>();
 	String sep = File.separator;
-	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test";
+	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test" + sep + "resources";
 
 	@Before
 	public void initialize() {

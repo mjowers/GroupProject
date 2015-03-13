@@ -17,7 +17,7 @@ public class BinarySearcher {
 		int frequency;
 		for (String word : articleArray) {
 			if (Collections.binarySearch(wordArray,word) > -1) {
-				frequency=Collections.frequency(articleArray, word); //use collections for searching list. uses frequency method
+				frequency = Collections.frequency(articleArray, word);
 				articleContains.put(word, frequency);
 			}
 		}

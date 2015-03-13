@@ -14,14 +14,15 @@ public class TextReaderTest {
 	ArrayList<String> actual = new ArrayList<String>();
 	ArrayList<String> expected = new ArrayList<String>();
 	String sep = File.separator;
-	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test";
+	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test"
+			+ sep + "resources";
 
 	@Before
 	public void initialize() {
 		expected.clear();
 		actual.clear();
 	}
-	
+
 	@Test
 	public void testChecksNoFile() {
 		Path noFile = Paths.get(path + sep + "nofile.txt");

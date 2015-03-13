@@ -159,6 +159,8 @@ public class URLContentExtractorTest extends TestCase {
 		URL url = new URL("http://www.test.com");
 		when(mockedExtractor.read(url)).thenReturn(TEST_HTML_SAMPLE_STRING);
 		String actual = mockedExtractor.readAndSanitize(url);
-		assertEquals("<p>This is simple text inside of an HTML document. Simple!</p>",actual);
+		assertEquals(
+				"<p>This is simple text inside of an HTML document. Simple!</p>",
+				actual);
 	}
 }

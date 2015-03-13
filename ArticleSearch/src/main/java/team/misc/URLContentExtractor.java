@@ -37,14 +37,14 @@ public class URLContentExtractor {
 		// extract the paragraph text only
 		for (Element element : elements) {
 			String targetHtml = element.text();
-			//put <p> and </p> back in order to break up paragraphs correctly 
+			// put <p> and </p> back in order to break up paragraphs correctly
 			builder.append("<p>").append(targetHtml).append("</p>");
 		}
 		// Puts just the text you want into a string that can then be searched
 		// and highlighted
 		return builder.toString();
 	}
-	
+
 	public String readAndSanitize(URL url) throws IOException {
 		String contents = read(url);
 		return sanitize(contents);

@@ -15,12 +15,13 @@ public class FileReaderObjectTest {
 	ArrayList<String> actual = new ArrayList<>();
 	ArrayList<String> expected = new ArrayList<>();
 	String sep = File.separator;
-	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test";
+	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test"
+			+ sep + "resources";
 	Path dummyPath = Paths.get(path + sep + "dummy.txt");
 	FileReaderObject dummyObject = new FileReaderObject(dummyPath);
 	Path noFilePath = Paths.get(path + sep + "nofile.txt");
 	FileReaderObject noObject = new FileReaderObject(noFilePath);
-	
+
 	@Before
 	public void initialize() {
 		actual.clear();
@@ -32,13 +33,13 @@ public class FileReaderObjectTest {
 		actual = noObject.getRawText();
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void noFileNoSanitizedText() {
 		actual = noObject.sanitizeText(" ");
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void dummyFileRawText() {
 		actual = dummyObject.getRawText();
@@ -54,7 +55,7 @@ public class FileReaderObjectTest {
 		expected.add("a test.");
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void dummyFileSanitizedText() {
 		actual = dummyObject.sanitizeText(" .\r");

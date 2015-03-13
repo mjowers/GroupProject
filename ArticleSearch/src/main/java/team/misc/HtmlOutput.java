@@ -7,10 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class HtmlOutput {
-	
+
 	public static void htmlOut(String html, Path fileOut) {
 		try {
-			BufferedWriter htmlOut = Files.newBufferedWriter(fileOut, StandardCharsets.UTF_8);
+			BufferedWriter htmlOut = Files.newBufferedWriter(fileOut,
+					StandardCharsets.UTF_8);
 			htmlOut.write(html);
 			htmlOut.close();
 		} catch (IOException ioe) {

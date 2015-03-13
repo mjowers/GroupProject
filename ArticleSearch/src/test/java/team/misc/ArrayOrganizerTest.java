@@ -9,7 +9,7 @@ public class ArrayOrganizerTest {
 	ArrayList<String> expected = new ArrayList<>();
 	ArrayList<String> actual = new ArrayList<>();
 	ArrayList<String> test = new ArrayList<>();
-	
+
 	@Before
 	public void initialize() {
 		actual.clear();
@@ -23,7 +23,7 @@ public class ArrayOrganizerTest {
 		actual = ArrayOrganizer.createArray(empty, " ");
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void nullDelimiters() {
 		test.add("one");
@@ -33,7 +33,7 @@ public class ArrayOrganizerTest {
 		actual = ArrayOrganizer.createArray(test, null);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void noDelimiters() {
 		test.add("one alpha.");

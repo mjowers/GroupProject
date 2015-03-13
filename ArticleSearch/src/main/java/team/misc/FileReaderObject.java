@@ -12,11 +12,11 @@ public class FileReaderObject {
 		this.filePath = filePath;
 		rawText = TextReader.readFile(filePath);
 	}
-	
+
 	public ArrayList<String> getRawText() {
 		return rawText;
 	}
-	
+
 	public ArrayList<String> sanitizeText(String delims) {
 		sanitizedText = ArrayOrganizer.createArray(rawText, delims);
 		return sanitizedText;

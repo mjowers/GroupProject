@@ -27,7 +27,7 @@ public class BinarySearcherTest {
 		actual = BinarySearcher.search(empty, empty);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void emptyArrayToSearch() {
 		ArrayList<String> empty = new ArrayList<>();
@@ -35,7 +35,7 @@ public class BinarySearcherTest {
 		actual = BinarySearcher.search(words, empty);
 		assertEquals(expected, actual);
 	}
-	
+
 	public void emptyArrayToSearchFrom() {
 		ArrayList<String> array = new ArrayList<>();
 		array.add("alpha");
@@ -84,7 +84,7 @@ public class BinarySearcherTest {
 		actual = BinarySearcher.search(words, repeatElements);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void initallyUnsortedArray() {
 		ArrayList<String> unsortedElements = new ArrayList<>();

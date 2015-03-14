@@ -1,12 +1,17 @@
 package team.misc;
 
-import java.io.IOException;
-import java.net.URL;
-
-import junit.framework.TestCase;
-import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLStreamHandler;
+
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
 public class URLContentExtractorTest extends TestCase {
@@ -92,6 +97,14 @@ public class URLContentExtractorTest extends TestCase {
 		assertFalse(contents.isEmpty());
 	}
 
+	@Test
+	public void testReadFromStream() throws IOException {
+		URL url = getURLThatReturns(TEST_HTML_EXAMPLECOM);
+		URLContentExtractor contentExtractor = new URLContentExtractor();
+		String actual = contentExtractor.read(url);
+		assertEquals(TEST_HTML_EXAMPLECOM, actual);
+	}
+
 	/**
 	 * This test could be dangerous because it is pulling from the internet
 	 * instead of a mock the content of the site could be changed and break our
@@ -152,15 +165,40 @@ public class URLContentExtractorTest extends TestCase {
 
 	@Test
 	public void testReadAndSanitize() throws IOException {
-		// CALLS_REAL_METHODS means that any method that was not stubbed by us
-		// uses the real method
-		URLContentExtractor mockedExtractor = mock(URLContentExtractor.class,
-				CALLS_REAL_METHODS);
-		URL url = new URL("http://www.test.com");
-		when(mockedExtractor.read(url)).thenReturn(TEST_HTML_SAMPLE_STRING);
-		String actual = mockedExtractor.readAndSanitize(url);
+		URLContentExtractor contentExtractor = new URLContentExtractor();
+		URL url = getURLThatReturns(TEST_HTML_SAMPLE_STRING);
+		String actual = contentExtractor.readAndSanitize(url);
 		assertEquals(
 				"<p>This is simple text inside of an HTML document. Simple!</p>",
 				actual);
+	}
+
+	/**
+	 * Use when you need to mock the contents of a url Can't mock URL directly
+	 * since it is a final class
+	 * 
+	 * @param contents
+	 *            contents that will return from this url stream
+	 * @return mocked URLConnection
+	 * @throws IOException
+	 */
+	private URL getURLThatReturns(String contents) throws IOException {
+		final URLConnection mockURLConnection = mock(URLConnection.class);
+
+		// inputStream is now equal to the bytes that make up contents
+		InputStream inputStream = new ByteArrayInputStream(
+				contents.getBytes("UTF-8"));
+
+		URLStreamHandler urlStreamHandler = new URLStreamHandler() {
+			@Override
+			protected URLConnection openConnection(URL url) {
+				return mockURLConnection;
+			}
+		};
+		when(mockURLConnection.getInputStream()).thenReturn(inputStream);
+		// constructor (String protocol, int port, String file, URLStreamHandler
+		// handler) used so that we can specify a StreamHandler
+		URL url = new URL("http", "www.example.com", -1, "", urlStreamHandler);
+		return url;
 	}
 }

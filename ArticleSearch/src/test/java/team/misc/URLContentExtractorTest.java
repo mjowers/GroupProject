@@ -121,58 +121,6 @@ public class URLContentExtractorTest extends TestCase {
 
 	}
 
-	// making sure sanitize works with a whole bunch of possible inputs
-	// could write a helper method or put all of this into a hashmap
-	public void testSanitize() {
-		URLContentExtractor contentExtractor = new URLContentExtractor();
-		String html = "<html><body>This is some text.<p>This should be returned</p></body></html>";
-		String expected = "<p>This should be returned</p>";
-		String actual = contentExtractor.sanitize(html);
-		assertEquals(expected, actual);
-	}
-
-	public void testSanitizeNoBody() {
-		URLContentExtractor contentExtractor = new URLContentExtractor();
-		String html = "<html></html>";
-		String expected = "";
-		String actual = contentExtractor.sanitize(html);
-		assertEquals(expected, actual);
-	}
-
-	public void testSanitizeNoPElements() {
-		URLContentExtractor contentExtractor = new URLContentExtractor();
-		String html = "<html><body>This is some text.This should be returned</body></html>";
-		String expected = "";
-		String actual = contentExtractor.sanitize(html);
-		assertEquals(expected, actual);
-	}
-
-	public void testSanitizeNull() {
-		URLContentExtractor contentExtractor = new URLContentExtractor();
-		String html = null;
-		String expected = "";
-		String actual = contentExtractor.sanitize(html);
-		assertEquals(expected, actual);
-	}
-
-	public void testSanitizeEmptyString() {
-		URLContentExtractor contentExtractor = new URLContentExtractor();
-		String html = "";
-		String expected = "";
-		String actual = contentExtractor.sanitize(html);
-		assertEquals(expected, actual);
-	}
-
-	@Test
-	public void testReadAndSanitize() throws IOException {
-		URLContentExtractor contentExtractor = new URLContentExtractor();
-		URL url = getURLThatReturns(TEST_HTML_SAMPLE_STRING);
-		String actual = contentExtractor.readAndSanitize(url);
-		assertEquals(
-				"<p>This is simple text inside of an HTML document. Simple!</p>",
-				actual);
-	}
-
 	/**
 	 * Use when you need to mock the contents of a url Can't mock URL directly
 	 * since it is a final class

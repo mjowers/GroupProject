@@ -13,7 +13,6 @@ public class BinarySearcher {
 			return articleContains;
 		}
 		Collections.sort(wordArray);
-		Collections.sort(articleArray);
 		int frequency;
 		for (String word : articleArray) {
 			String wordLowerCase = word.toLowerCase();

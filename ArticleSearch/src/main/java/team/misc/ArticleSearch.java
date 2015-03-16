@@ -38,7 +38,7 @@ public class ArticleSearch {
 			textArray.add(text);
 
 			textWordsArray = ArrayOrganizer.createArray(textArray,
-					".?! ,()\"\'");
+					".?! ,()\"");
 
 			articleContains = BinarySearcher.search(wordList, textWordsArray);
 

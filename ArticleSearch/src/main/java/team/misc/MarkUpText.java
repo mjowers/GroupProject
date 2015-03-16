@@ -19,11 +19,11 @@ public class MarkUpText {
 		Elements elements = doc.select("p");
 
 		for (Element element : elements) {
+			String paragraphText = element.text();
 			for (String word : words) {
-				if (element.text().contains(word)) {
-					element.html(element.text().replaceAll(
-							"\\b(?i)(" + word + ")\\b", "<mark>$1</mark>"));
-				}
+				paragraphText = paragraphText.replaceAll("\\b(?i)(" + word
+						+ ")\\b", "<mark>$1</mark>");
+				element.html(paragraphText);
 			}
 		}
 		return doc.html();

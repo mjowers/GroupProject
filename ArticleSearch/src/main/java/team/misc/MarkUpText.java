@@ -17,19 +17,15 @@ public class MarkUpText {
 		}
 		Document doc = Jsoup.parse(text, "UTF-8");
 		Elements elements = doc.select("p");
-		for (String word : words) {
 
-			for (Element element : elements) {
-				String paragraphText = element.text();
-				if (paragraphText.contains(word)) {
-					element.html("<p>"
-							+ paragraphText.replaceAll("\\b(?i)(" + word
-							+ ")\\b", "<mark>$1</mark>") + "</p>");
+		for (Element element : elements) {
+			for (String word : words) {
+				if (element.text().contains(word)) {
+					element.html(element.text().replaceAll(
+							"\\b(?i)(" + word + ")\\b", "<mark>$1</mark>"));
 				}
 			}
-
 		}
 		return doc.html();
 	}
-
 }

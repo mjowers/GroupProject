@@ -12,6 +12,10 @@ public class MarkUpTextTest {
 	ArrayList<String> mark = new ArrayList<>();
 	String expected;
 	String actual;
+	String htmlStart = "<html><head></head><body><p>";
+	String htmlEnd = "</p></body></html>";
+	String markUpStart = "<html>\n <head></head>\n <body>\n  <p>";
+	String markUpEnd = "</p>\n </body>\n</html>";
 
 	@Before
 	// before it runs each test, it'll do these things
@@ -56,57 +60,57 @@ public class MarkUpTextTest {
 
 	@Test
 	public void oneWordMarkUp() {
-		text = "text";
+		text = htmlStart + "text" + htmlEnd;
 		mark.add("text");
 		actual = MarkUpText.markUp(text, mark);
-		expected = "<mark>text</mark>";
+		expected = markUpStart + "<mark>text</mark>" + markUpEnd;
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void stringMarkUp() {
-		text = "this text is longer now";
+		text = htmlStart + "this text is longer now" + htmlEnd;
 		mark.add("text");
 		actual = MarkUpText.markUp(text, mark);
-		expected = "this <mark>text</mark> is longer now";
+		expected = markUpStart + "this <mark>text</mark> is longer now" + markUpEnd;
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void multiWordMarkUp() {
-		text = "this text is longer now";
+		text = htmlStart + "this text is longer now" + htmlEnd;
 		mark.add("text");
 		mark.add("longer");
 		actual = MarkUpText.markUp(text, mark);
-		expected = "this <mark>text</mark> is <mark>longer</mark> now";
+		expected = markUpStart + "this <mark>text</mark> is <mark>longer</mark> now" + markUpEnd;
 		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void wordsInsideWords() {
-		text = "quest question";
+		text = htmlStart + "quest question" + htmlEnd;
 		mark.add("quest");
 		actual = MarkUpText.markUp(text, mark);
-		expected = "<mark>quest</mark> question";
+		expected = markUpStart + "<mark>quest</mark> question" + markUpEnd;
 		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void hyphenatedWords() {
-		text = "here's a-hyphen";
+		text = htmlStart + "here's a-hyphen" + htmlEnd;
 		mark.add("a-hyphen");
 		actual = MarkUpText.markUp(text, mark);
-		expected = "here's <mark>a-hyphen</mark>";
+		expected = markUpStart + "here's <mark>a-hyphen</mark>" + markUpEnd;
 		assertEquals(expected, actual);
 	}
 	
 	@Test
 	public void caseConflict() {
-		text = "CApital LEttERS";
+		text = htmlStart + "CApital LEttERS" + htmlEnd;
 		mark.add("capital");
 		mark.add("letters");
 		actual = MarkUpText.markUp(text, mark);
-		expected = "<mark>CApital</mark> <mark>LEttERS</mark>";
+		expected = markUpStart + "<mark>CApital</mark> <mark>LEttERS</mark>" + markUpEnd;
 		assertEquals(expected, actual);
 	}
 

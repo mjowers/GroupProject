@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 public class ArticleSearch {
 	public static void main(String[] args) throws IOException {
 		String sep = File.separator;
@@ -25,23 +30,24 @@ public class ArticleSearch {
 		ArrayList<String> urlList = urls.getRawText();
 
 		URLContentExtractor urlce = new URLContentExtractor();
-		
+
 		for (int i = 0; i < urlList.size(); i++) {
 			ArrayList<String> textArray = new ArrayList<>();
 			ArrayList<String> textWordsArray = new ArrayList<>();
 			HashMap<String, Integer> articleContains = new HashMap<>();
 			ArrayList<String> articleWords = new ArrayList<>();
 
-
 			URL url = new URL(urlList.get(i));
 			String text = urlce.read(url);
-			textArray.add(text);
 
-			textWordsArray = ArrayOrganizer.createArray(textArray,
-					".?! ,()\"");
+			Document doc = Jsoup.parse(text, "UTF-8");
+			Elements elements = doc.select("p");
+			for (Element element : elements) {
+				textArray.add(element.text());
+			}
+			textWordsArray = ArrayOrganizer.createArray(textArray, ".?! ,()\"");
 
 			articleContains = BinarySearcher.search(wordList, textWordsArray);
-
 			Set<String> keySet = articleContains.keySet();
 			System.out.println("Article " + (i + 1) + " contains...");
 			for (String key : keySet) {
@@ -51,7 +57,6 @@ public class ArticleSearch {
 			System.out.println();
 
 			articleWords.addAll(keySet);
-
 			String markedText = MarkUpText.markUp(text, articleWords);
 
 			String outPathString = System.getProperty("user.home") + sep

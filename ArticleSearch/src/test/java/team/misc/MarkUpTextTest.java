@@ -113,5 +113,10 @@ public class MarkUpTextTest {
 		expected = markUpStart + "<mark>CApital</mark> <mark>LEttERS</mark>" + markUpEnd;
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void constructorTest() {
+		MarkUpText mut = new MarkUpText();
+	}
 
 }

@@ -38,4 +38,9 @@ public class TextReaderTest {
 		expected.add("a test.");
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void constructorTest() {
+		TextReader tr = new TextReader();
+	}
 }

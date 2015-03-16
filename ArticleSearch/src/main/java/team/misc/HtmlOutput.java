@@ -15,7 +15,7 @@ public class HtmlOutput {
 			htmlOut.write(html);
 			htmlOut.close();
 		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			ioe.getMessage();
 		}
 	}
 }

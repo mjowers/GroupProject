@@ -59,4 +59,17 @@ public class HtmlOutputTest {
 		actual = TextReader.readFile(pathOut);
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void badPath() {
+		Path badPath = Paths.get("");
+		HtmlOutput.htmlOut("uh ooh", badPath);
+		actual = TextReader.readFile(badPath);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void constructorTest() {
+		HtmlOutput ho = new HtmlOutput();
+	}
 }

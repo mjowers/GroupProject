@@ -112,4 +112,9 @@ public class BinarySearcherTest {
 		actual = BinarySearcher.search(words, unsortedElements);
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void constructorTest() {
+		BinarySearcher bs = new BinarySearcher();
+	}
 }

@@ -25,23 +25,20 @@ public class ArticleSearch {
 		ArrayList<String> urlList = urls.getRawText();
 
 		URLContentExtractor urlce = new URLContentExtractor();
-		ArrayList<String> textArray = new ArrayList<>();
-		ArrayList<String> textWordsArray = new ArrayList<>();
-		HashMap<String, Integer> articleContains = new HashMap<>();
-		ArrayList<String> articleWords = new ArrayList<>();
-
+		
 		for (int i = 0; i < urlList.size(); i++) {
-			textArray.clear();
-			textWordsArray.clear();
-			articleContains.clear();
-			articleWords.clear();
+			ArrayList<String> textArray = new ArrayList<>();
+			ArrayList<String> textWordsArray = new ArrayList<>();
+			HashMap<String, Integer> articleContains = new HashMap<>();
+			ArrayList<String> articleWords = new ArrayList<>();
+
 
 			URL url = new URL(urlList.get(i));
-			String text = urlce.readAndSanitize(url);
+			String text = urlce.read(url);
 			textArray.add(text);
 
 			textWordsArray = ArrayOrganizer.createArray(textArray,
-					".?! ,()\"\'");
+					".?! ,()\"");
 
 			articleContains = BinarySearcher.search(wordList, textWordsArray);
 

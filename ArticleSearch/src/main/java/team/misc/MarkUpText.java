@@ -10,9 +10,9 @@ import org.jsoup.select.Elements;
 public class MarkUpText {
 
 	public static String markUp(String text, ArrayList<String> words) {
-		if (text == null || words.size() < 1 || text == "") {
+		if (text == null || words.size() < 1 || text.equals("")) {
 			return text;
-		} else if (words.size() == 1 && words.get(0) == "") {
+		} else if (words.size() == 1 && words.get(0).equals("")) {
 			return text;
 		}
 		Document doc = Jsoup.parse(text, "UTF-8");

@@ -67,9 +67,9 @@ public class ArrayOrganizerTest {
 		actual = ArrayOrganizer.createArray(test, " ,\"");
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void constructorTest() {
-		ArrayOrganizer ao = new ArrayOrganizer();
+		new ArrayOrganizer();
 	}
 }

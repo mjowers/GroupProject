@@ -72,7 +72,8 @@ public class MarkUpTextTest {
 		text = htmlStart + "this text is longer now" + htmlEnd;
 		mark.add("text");
 		actual = MarkUpText.markUp(text, mark);
-		expected = markUpStart + "this <mark>text</mark> is longer now" + markUpEnd;
+		expected = markUpStart + "this <mark>text</mark> is longer now"
+				+ markUpEnd;
 		assertEquals(expected, actual);
 	}
 
@@ -82,10 +83,12 @@ public class MarkUpTextTest {
 		mark.add("text");
 		mark.add("longer");
 		actual = MarkUpText.markUp(text, mark);
-		expected = markUpStart + "this <mark>text</mark> is <mark>longer</mark> now" + markUpEnd;
+		expected = markUpStart
+				+ "this <mark>text</mark> is <mark>longer</mark> now"
+				+ markUpEnd;
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void wordsInsideWords() {
 		text = htmlStart + "quest question" + htmlEnd;
@@ -94,7 +97,7 @@ public class MarkUpTextTest {
 		expected = markUpStart + "<mark>quest</mark> question" + markUpEnd;
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void hyphenatedWords() {
 		text = htmlStart + "here's a-hyphen" + htmlEnd;
@@ -103,20 +106,21 @@ public class MarkUpTextTest {
 		expected = markUpStart + "here's <mark>a-hyphen</mark>" + markUpEnd;
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void caseConflict() {
 		text = htmlStart + "CApital LEttERS" + htmlEnd;
 		mark.add("capital");
 		mark.add("letters");
 		actual = MarkUpText.markUp(text, mark);
-		expected = markUpStart + "<mark>CApital</mark> <mark>LEttERS</mark>" + markUpEnd;
+		expected = markUpStart + "<mark>CApital</mark> <mark>LEttERS</mark>"
+				+ markUpEnd;
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void constructorTest() {
-		MarkUpText mut = new MarkUpText();
+		new MarkUpText();
 	}
 
 }

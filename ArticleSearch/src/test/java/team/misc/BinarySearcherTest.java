@@ -54,7 +54,7 @@ public class BinarySearcherTest {
 		actual = BinarySearcher.search(words, oneElement);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void caseConflict() {
 		ArrayList<String> capitalizeElement = new ArrayList<>();
@@ -112,9 +112,9 @@ public class BinarySearcherTest {
 		actual = BinarySearcher.search(words, unsortedElements);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void constructorTest() {
-		BinarySearcher bs = new BinarySearcher();
+		new BinarySearcher();
 	}
 }

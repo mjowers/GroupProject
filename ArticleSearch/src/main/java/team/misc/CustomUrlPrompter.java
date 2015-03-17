@@ -35,7 +35,7 @@ public class CustomUrlPrompter {
 				ok = true;
 			} else {
 				try {
-					URL url = new URL(urlString);
+					new URL(urlString);
 					urlList.add(urlString);
 					ok = true;
 				} catch (MalformedURLException mue) {

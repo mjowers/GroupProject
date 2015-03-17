@@ -21,7 +21,7 @@ public class CustomWordListPrompterTest {
 	static ArrayList<String> actual = new ArrayList<>();
 	static ByteArrayInputStream input;
 	FileReaderObject words;
-	
+
 	@Before
 	public void initialize() {
 		expected.clear();
@@ -40,17 +40,20 @@ public class CustomWordListPrompterTest {
 
 	@Test
 	public void useCustomFile() throws IOException {
-		input = new ByteArrayInputStream((testPath + sep + "customwords.txt").getBytes());
+		input = new ByteArrayInputStream(
+				(testPath + sep + "customwords.txt").getBytes());
 		System.setIn(input);
 		actual = CustomWordListPrompter.prompt();
-		words = new FileReaderObject(Paths.get(testPath + sep + "customwords.txt"));
+		words = new FileReaderObject(Paths.get(testPath + sep
+				+ "customwords.txt"));
 		expected = words.sanitizeText(" ,\"");
 		assertEquals(expected, actual);
 	}
 
 	@Test
 	public void useInputWords() throws IOException {
-		input = new ByteArrayInputStream(("custom   words,\"input\"").getBytes());
+		input = new ByteArrayInputStream(
+				("custom   words,\"input\"").getBytes());
 		System.setIn(input);
 		actual = CustomWordListPrompter.prompt();
 		expected.add("custom");
@@ -58,9 +61,9 @@ public class CustomWordListPrompterTest {
 		expected.add("input");
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void constructorTest() throws IOException {
-		CustomWordListPrompter cwlp = new CustomWordListPrompter();
+		new CustomWordListPrompter();
 	}
 }

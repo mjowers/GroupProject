@@ -14,7 +14,8 @@ public class HtmlOutputTest {
 	ArrayList<String> actual = new ArrayList<>();
 	ArrayList<String> expected = new ArrayList<>();
 	String sep = File.separator;
-	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test" + sep + "resources";
+	String path = new File("").getAbsolutePath() + sep + "src" + sep + "test"
+			+ sep + "resources";
 
 	@Before
 	public void initialize() {
@@ -59,7 +60,7 @@ public class HtmlOutputTest {
 		actual = TextReader.readFile(pathOut);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void badPath() {
 		Path badPath = Paths.get("");
@@ -67,9 +68,9 @@ public class HtmlOutputTest {
 		actual = TextReader.readFile(badPath);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void constructorTest() {
-		HtmlOutput ho = new HtmlOutput();
+		new HtmlOutput();
 	}
 }

@@ -25,11 +25,8 @@ public class ArticleSearch {
 	public static void main(String[] args) throws IOException {
 		String sep = File.separator;
 
-		Path wordsPath = CustomWordListPrompter.prompt();
+		ArrayList<String> wordList = CustomWordListPrompter.prompt();
 		ArrayList<String> urlList = CustomUrlPrompter.prompt();
-
-		FileReaderObject words = new FileReaderObject(wordsPath);
-		ArrayList<String> wordList = words.sanitizeText(",\"");
 
 		URLContentExtractor urlce = new URLContentExtractor();
 

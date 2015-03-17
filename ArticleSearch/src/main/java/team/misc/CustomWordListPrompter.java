@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class CustomWordListPrompter {
 	static String sep = File.separator;
@@ -13,26 +14,30 @@ public class CustomWordListPrompter {
 			+ "main" + sep + "resources";
 	static Path wordsPath = null;
 
-	public static Path prompt() throws IOException {
-		boolean ok = false;
-		String filePath = null;
+	public static ArrayList<String> prompt() throws IOException {
+		String userWordInput = null;
 		BufferedReader wordsReader = new BufferedReader(new InputStreamReader(
 				System.in));
+		FileReaderObject words;
+		ArrayList<String> wordList = new ArrayList<>();
 
-		do {
-			System.out
-					.println("Please enter a file name, or press enter to access the default words.txt: ");
-			filePath = wordsReader.readLine();
-			if (filePath.equals("")) {
-				wordsPath = Paths.get(resPath + sep + Constants.WORDS_TXT);
-				ok = true;
-			} else if (new File(filePath).exists()) {
-				wordsPath = Paths.get(filePath);
-				ok = true;
-			} else
-				System.err.println("Doesn't exist or is not a file.");
-		} while (!ok);
+		System.out
+				.println("Please enter a file name, words separated by spaces, or press enter to access the default words.txt: ");
+		userWordInput = wordsReader.readLine();
+		if (userWordInput.equals("")) {
+			wordsPath = Paths.get(resPath + sep + Constants.WORDS_TXT);
+			words = new FileReaderObject(wordsPath);
+			wordList = words.sanitizeText(" ,\"");
+		} else if (new File(userWordInput).exists()) {
+			wordsPath = Paths.get(userWordInput);
+			words = new FileReaderObject(wordsPath);
+			wordList = words.sanitizeText(" ,\"");
+		} else {
+			ArrayList<String> inputWords = new ArrayList<>();
+			inputWords.add(userWordInput.toString());
+			wordList = ArrayOrganizer.createArray(inputWords, " ,\"");
+		}
 
-		return wordsPath;
+		return wordList;
 	}
 }
